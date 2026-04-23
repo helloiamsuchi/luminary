@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Constellation Mood Board</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@300;400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Prism Background -->
+  <canvas id="prismCanvas"></canvas>
+
+  <!-- Floating particles -->
+  <div id="particles"></div>
+
+  <!-- Header -->
+  <header>
+    <h1 class="title">✦ Luminary ✦</h1>
+    <p class="subtitle">Draw your constelaation.</p>
+  </header>
+
+  <!-- Glass Toolbar -->
+  <div class="toolbar" id="toolbar">
+
+    <button class="glass-btn active" id="btn-draw" onclick="setMode('draw')">
+      <span class="btn-icon">✦</span>
+      <span class="btn-label">Place Star</span>
+      <div class="shine"></div>
+    </button>
+
+    <button class="glass-btn" id="btn-connect" onclick="setMode('connect')">
+      <span class="btn-icon">⟡</span>
+      <span class="btn-label">Connect</span>
+      <div class="shine"></div>
+    </button>
+
+    <button class="glass-btn" id="btn-erase" onclick="setMode('erase')">
+      <span class="btn-icon">◌</span>
+      <span class="btn-label">Erase</span>
+      <div class="shine"></div>
+    </button>
+
+    <div class="divider"></div>
+
+    <button class="glass-btn" id="btn-name" onclick="openNaming()">
+      <span class="btn-icon">✎</span>
+      <span class="btn-label">Name It</span>
+      <div class="shine"></div>
+    </button>
+
+    <button class="glass-btn" id="btn-clear" onclick="clearAll()">
+      <span class="btn-icon">↺</span>
+      <span class="btn-label">Clear</span>
+      <div class="shine"></div>
+    </button>
+
+    <button class="glass-btn" id="btn-save" onclick="saveConstellation()">
+      <span class="btn-icon">◈</span>
+      <span class="btn-label">Save</span>
+      <div class="shine"></div>
+    </button>
+
+  </div>
+
+  <!-- Star color picker -->
+  <div class="color-palette" id="colorPalette">
+    <div class="palette-label">Star Hue</div>
+    <div class="color-swatches">
+      <button class="swatch active" style="--c:#e8d5ff" data-color="#e8d5ff" onclick="setStarColor(this)"></button>
+      <button class="swatch" style="--c:#ffd6e8" data-color="#ffd6e8" onclick="setStarColor(this)"></button>
+      <button class="swatch" style="--c:#d6f0ff" data-color="#d6f0ff" onclick="setStarColor(this)"></button>
+      <button class="swatch" style="--c:#fffbd6" data-color="#fffbd6" onclick="setStarColor(this)"></button>
+      <button class="swatch" style="--c:#d6ffe8" data-color="#d6ffe8" onclick="setStarColor(this)"></button>
+      <button class="swatch" style="--c:#ffffff" data-color="#ffffff" onclick="setStarColor(this)"></button>
+    </div>
+  </div>
+
+  <!-- SVG Canvas for constellation -->
+  <svg id="constellationSVG" xmlns="http://www.w3.org/2000/svg"></svg>
+
+  <!-- Stars canvas layer (HTML elements) -->
+  <div id="starField"></div>
+
+  <!-- Naming Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-glass">
+      <div class="modal-shine"></div>
+      <h2 class="modal-title">Name Your Constellation</h2>
+      <p class="modal-hint">What do you see in the stars?</p>
+      <input type="text" class="modal-input" id="constellationInput" placeholder="e.g. The Dreaming Fox..." maxlength="40"/>
+      <div class="modal-buttons">
+        <button class="glass-btn small" onclick="saveName()">
+          <span class="btn-icon">✦</span>
+          <span class="btn-label">Confirm</span>
+          <div class="shine"></div>
+        </button>
+        <button class="glass-btn small secondary" onclick="closeModal()">
+          <span class="btn-label">Cancel</span>
+          <div class="shine"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Constellation Name Display -->
+  <div class="constellation-name" id="constellationName"></div>
+
+  <!-- Saved Gallery -->
+  <div class="gallery-toggle" onclick="toggleGallery()">
+    <span>◈ Saved</span>
+    <div class="shine"></div>
+  </div>
+
+  <div class="gallery-panel" id="galleryPanel">
+    <div class="gallery-header">Saved Constellations</div>
+    <div class="gallery-list" id="galleryList">
+      <p class="gallery-empty">No constellations saved yet.<br/>Create and save your first one.</p>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Mode indicator -->
+  <div class="mode-indicator" id="modeIndicator">✦ Place Stars</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
